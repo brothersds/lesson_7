@@ -19,3 +19,68 @@
 вернет строку: *****\n*****\n**.
 Или, количество ячеек клетки равняется 15, количество ячеек в ряду — 5. Тогда метод make_order()
 вернет строку: *****\n*****\n*****.'''
+
+
+class Cell:
+    def __init__(self, numbers_cell):
+        self.view = []
+        self.numbers = numbers_cell
+
+    def __add__(self, other):
+        self.numbers = self.numbers + other.numbers
+        return self
+
+    def __sub__(self, other):
+        if (self.numbers - other.numbers) < 0:
+            return 'Нельзя выполнить эту операцию'
+        else:
+            self.numbers = self.numbers - other.numbers
+            return self
+
+    def __mul__(self, other):
+        self.numbers = self.numbers * other.numbers
+        return self
+
+    def __truediv__(self, other):
+        self.numbers = int(self.numbers / other.numbers)
+        return self
+
+    def __str__(self):
+        self.view.clear()
+        for count in range(self.numbers):
+            self.view.append('*')
+        return ''.join(self.view)
+
+    def make_order(self, cell_in_row):
+        for count in range(self.numbers // cell_in_row):
+            print(''.join(self.view[:cell_in_row]) + '\n')
+        return (''.join(self.view[:(self.numbers % cell_in_row)]) +
+                ('\n' if (self.numbers % cell_in_row) != 0 else ''))
+
+
+cell_1 = Cell(20)
+cell_2 = Cell(10)
+cell_3 = Cell(12)
+print(f'Cell -1 {cell_1}')
+print(f'Cell -2 {cell_2}')
+print(f'Cell -3 {cell_3}')
+print(f'Cell - 1 по рядам')
+print(cell_1.make_order(7))
+print(f'Cell - 2 по рядам')
+print(cell_2.make_order(3))
+print(f'Cell - 3 по рядам')
+print(cell_3.make_order(5))
+print(f'Cell 1 + 2 {cell_1 + cell_2}')
+print(f'Cell - 1 по рядам')
+print(cell_1.make_order(7))
+print(f'Cell 2 - 3 {cell_2 - cell_3}')
+print(f'Cell - 2 по рядам')
+print(cell_2.make_order(3))
+print(f'Cell 2 * 3 {cell_2 * cell_3}')
+print(f'Cell - 2 по рядам')
+print(cell_2.make_order(10))
+print(f'Cell - 3 по рядам')
+print(cell_3.make_order(10))
+print(f'Cell 2 / 3 {cell_2 / cell_3}')
+print(f'Cell - 2 по рядам')
+print(cell_2.make_order(10))
