@@ -1,2 +1,2 @@
 lesson_7
-completed all task
+completed all tasks
